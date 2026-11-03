@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABN°C Liftra 3D Mist - Creator Playbook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入了 Montserrat (超大字重标题) 和 Inter (易读正文) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-primary: #8B3A3A;
+            --brand-accent: #FF6B6B;
+            --brand-bg: #FFF9F9;
+            --brand-light: #FFF0F0;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--brand-bg); 
+            color: #2D1A1A; 
+            overflow-x: hidden; 
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* 统一使用 Montserrat 作为大字标题 */
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+
+        /* 1. Fade-up 滚动动画 */
+        .fade-up { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* 2. 心跳放大 Heartbeat Zoom */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.08); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.08); }
+            70% { transform: scale(1); }
+        }
+        @keyframes ripple {
+            0% { box-shadow: 0 0 0 0 rgba(139, 58, 58, 0.4), 0 0 0 0 rgba(139, 58, 58, 0.4); }
+            100% { box-shadow: 0 0 0 20px rgba(139, 58, 58, 0), 0 0 0 40px rgba(139, 58, 58, 0); }
+        }
+        .animate-heartbeat { animation: heartbeat 1.3s infinite ease-in-out; }
+        .ripple-effect { animation: ripple 1.3s infinite cubic-bezier(0.66, 0, 0, 1); border-radius: 50%; }
+
+        /* 3. 逐字弹跳 Letter Bounce */
+        .bounce-word { display: inline-flex; flex-wrap: wrap; }
+        .bounce-letter { 
+            display: inline-block; 
+            animation: letterBounce 2.2s infinite ease-in-out; 
+            transform-origin: bottom center; 
+        }
+        @keyframes letterBounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) scaleX(1) scaleY(1); }
+            10% { transform: translateY(0) scaleX(1.2) scaleY(0.8); }
+            30% { transform: translateY(-20px) scaleX(0.8) scaleY(1.2); }
+            40% { transform: translateY(0) scaleX(1.1) scaleY(0.9); }
+            60% { transform: translateY(-10px) scaleX(0.95) scaleY(1.05); }
+        }
+
+        /* 4. 游标扩散填满按钮 */
+        .btn-fill {
+            position: relative; overflow: hidden; padding: 16px 32px; border: 2px solid var(--brand-primary); border-radius: 999px; color: var(--brand-primary); background: transparent; font-weight: 800; transition: color 0.3s;
+            z-index: 1; cursor: pointer; display: inline-block; font-family: 'Montserrat', sans-serif;
+        }
+        .btn-fill::before {
+            content: ''; position: absolute; top: var(--y); left: var(--x);
+            width: var(--size); height: var(--size); background: var(--brand-primary);
+            border-radius: 50%; transform: translate(-50%, -50%) scale(0); transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1); z-index: -1;
+        }
+        .btn-fill:hover { color: white; }
+        .btn-fill:hover::before { transform: translate(-50%, -50%) scale(1); }
+
+        /* 脚本卡片美化 */
+        .script-card { box-shadow: 0 10px 30px rgba(0,0,0,0.03); transition: transform 0.3s; }
+        .script-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(139, 58, 58, 0.08); }
+        .script-tag { background: var(--brand-accent); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; font-family: 'Montserrat', sans-serif; }
+        .script-text { font-size: 1.15rem; line-height: 1.6; font-weight: 500; color: #4A3333; }
+
+        /* 卖点卡片 */
+        .feature-card { transition: all 0.3s; border: 1px solid #FFE0E0; }
+        .feature-card:hover { background: var(--brand-primary); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(139, 58, 58, 0.15); border-color: var(--brand-primary); }
+        .feature-card:hover h3 { color: white; }
+        .feature-card:hover .feature-icon { background: rgba(255,255,255,0.2); }
+        .feature-card:hover .feature-desc { color: #FFE0E0; }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <nav class="fixed w-full top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer">
+                <span class="text-2xl font-black" style="color: var(--brand-primary)">ABN°C</span>
+                <span class="text-xs font-black bg-[#FFE0E0] px-2 py-1 rounded text-[#8B3A3A]">CREATOR HUB</span>
+            </div>
+            <a href="https://shop.tiktok.com/us/store/abnc-us-store/8656968372695634186" target="_blank" class="btn-fill text-sm hidden md:block" id="nav-btn">Get Free Sample</a>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <header class="pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div class="flex-1 fade-up">
+                <div class="inline-block px-4 py-2 rounded-full text-sm font-bold mb-6" style="background: var(--brand-light); color: var(--brand-primary)">
+                    🎵 TikTok Creator Playbook
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight" style="color: var(--brand-primary)">
+                    <span class="bounce-word" id="hero-title">Viral Scripts</span><br>
+                    Included.
+                </h1>
+                <p class="text-xl mt-6 text-gray-700 font-medium">80% Serum. 20% Oil. Instant Glass Skin.<br>Copy, paste, and film your next viral video.</p>
+                <div class="mt-8 flex gap-4">
+                    <a href="#scripts" class="btn-fill" id="hero-btn">View 4 Scripts</a>
+                </div>
+            </div>
+            <div class="flex-1 relative fade-up flex justify-center" style="transition-delay: 0.2s;">
+                <div class="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] flex items-center justify-center rounded-full bg-[#FFF0F0] ripple-effect">
+                    <img src="https://i.postimg.cc/wjKZsV43/20261028-172919.png" alt="Model Glow" class="rounded-full object-cover w-[90%] h-[90%] animate-heartbeat shadow-lg">
+                </div>
+                <img src="https://i.postimg.cc/vTthgr4H/ABNC-LIFTRA-3D-FIRMING-MIST.jpg" alt="Product" class="absolute bottom-0 right-0 md:-right-4 w-32 md:w-44 rounded-2xl shadow-2xl border-4 border-white hover:scale-110 transition duration-300">
+            </div>
+        </div>
+    </header>
+
+    <!-- 核心数据 -->
+    <section class="py-16 bg-white border-y border-gray-100">
+        <div class="max-w-6xl mx-auto px-6 text-center fade-up">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-10" style="color: var(--brand-primary)">Backed by Clinical Proof</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-[#FFF9F9] p-8 rounded-3xl border border-[#FFE0E0]">
+                    <h3 class="text-6xl font-black" style="color: var(--brand-primary)">+102%</h3>
+                    <p class="font-bold text-lg mt-2">Moisture Content</p>
+                    <p class="text-sm text-gray-500">Instantly after 1 use</p>
+                </div>
+                <div class="bg-[#FFF9F9] p-8 rounded-3xl border border-[#FFE0E0]">
+                    <h3 class="text-6xl font-black" style="color: var(--brand-primary)">+34%</h3>
+                    <p class="font-bold text-lg mt-2">Skin Radiance</p>
+                    <p class="text-sm text-gray-500">Instantly after 1 use</p>
+                </div>
+                <div class="bg-[#FFF9F9] p-8 rounded-3xl border border-[#FFE0E0]">
+                    <h3 class="text-6xl font-black" style="color: var(--brand-primary)">+11.7%</h3>
+                    <p class="font-bold text-lg mt-2">Instant Plumping</p>
+                    <p class="text-sm text-gray-500">Temporary lifting effect</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心卖点与成分 -->
+    <section id="features" class="py-20 px-6 bg-[#FFF9F9]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12 fade-up">
+                <h2 class="text-4xl md:text-5xl font-black tracking-tight" style="color: var(--brand-primary)">Why It Goes Viral</h2>
+                <p class="text-xl text-gray-600 mt-4 font-medium">The unique selling points (USPs) you need to highlight.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 卖点 1 -->
+                <div class="feature-card bg-white rounded-3xl p-8 fade-up flex flex-col items-start h-full cursor-default">
+                    <div class="feature-icon w-16 h-16 rounded-2xl bg-[#FFF0F0] text-[#8B3A3A] flex items-center justify-center text-4xl mb-6 transition-colors shadow-sm">
+                        💧
+                    </div>
+                    <h3 class="text-2xl font-extrabold mb-3 tracking-tight transition-colors">80/20 Bi-Phase</h3>
+                    <p class="feature-desc text-base text-gray-600 transition-colors leading-relaxed font-medium">80% Lifting Essence + 20% Moringa Oil. Shake to mix for an ultra-fine, non-sticky mist.</p>
+                </div>
+
+                <!-- 卖点 2 -->
+                <div class="feature-card bg-white rounded-3xl p-8 fade-up flex flex-col items-start h-full cursor-default" style="transition-delay: 0.1s;">
+                    <div class="feature-icon w-16 h-16 rounded-2xl bg-[#FFF0F0] text-[#8B3A3A] flex items-center justify-center text-4xl mb-6 transition-colors shadow-sm">
+                        ✨
+                    </div>
+                    <h3 class="text-2xl font-extrabold mb-3 tracking-tight transition-colors">Instant Glass Skin</h3>
+                    <p class="feature-desc text-base text-gray-600 transition-colors leading-relaxed font-medium">Creates a breathable moisture barrier that gives an expensive-looking natural glow immediately.</p>
+                </div>
+
+                <!-- 卖点 3 -->
+                <div class="feature-card bg-white rounded-3xl p-8 fade-up flex flex-col items-start h-full cursor-default" style="transition-delay: 0.2s;">
+                    <div class="feature-icon w-16 h-16 rounded-2xl bg-[#FFF0F0] text-[#8B3A3A] flex items-center justify-center text-4xl mb-6 transition-colors shadow-sm">
+                        🧬
+                    </div>
+                    <h3 class="text-2xl font-extrabold mb-3 tracking-tight transition-colors">LIFTRA PDRN™</h3>
+                    <p class="feature-desc text-base text-gray-600 transition-colors leading-relaxed font-medium">Formulated with LIFTRA PDRN™ and 300 Da low-molecular collagen to instantly plump and firm skin.</p>
+                </div>
+
+                <!-- 卖点 4 -->
+                <div class="feature-card bg-white rounded-3xl p-8 fade-up flex flex-col items-start h-full cursor-default" style="transition-delay: 0.3s;">
+                    <div class="feature-icon w-16 h-16 rounded-2xl bg-[#FFF0F0] text-[#8B3A3A] flex items-center justify-center text-4xl mb-6 transition-colors shadow-sm">
+                        🛡️
+                    </div>
+                    <h3 class="text-2xl font-extrabold mb-3 tracking-tight transition-colors">All-Day Defense</h3>
+                    <p class="feature-desc text-base text-gray-600 transition-colors leading-relaxed font-medium">Locks in moisture against harsh office AC and dry indoor air. Perfect for mid-day makeup refresh.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4个核心脚本 -->
+    <section id="scripts" class="py-20 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12 fade-up">
+                <h2 class="text-4xl md:text-5xl font-black tracking-tight" style="color: var(--brand-primary)">Choose Your Vibe</h2>
+                <p class="text-xl text-gray-600 mt-4 font-medium">4 tested scripts designed to convert. Just hit record.</p>
+            </div>
+
+            <!-- Script 1 -->
+            <div class="script-card bg-[#FFF9F9] rounded-3xl mb-10 overflow-hidden flex flex-col md:flex-row fade-up">
+                <div class="md:w-1/2 p-8 md:p-10">
+                    <span class="script-tag">B01: DRY & TIRED</span>
+                    <h3 class="text-2xl font-extrabold mt-4 mb-6 leading-tight" style="color: var(--brand-primary)">Addressing skin dehydration and makeup flaking mid-day.</h3>
+                    <div class="space-y-5">
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">HOOK (0-3s)</strong> "Is your skin tight and dry by midday? Your skincare isn't locking in moisture, and makeup is starting to flake."</div>
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">MAIN POINT</strong> "This is ABNC Liftra 3D Mist - an 80% serum and 20% oil bi-phase formula. Just shake to mix!"</div>
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">DEMO</strong> "Instantly quenches dry skin and leaves a glow barrier. Remember to close eyes when spraying!"</div>
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">CTA</strong> "Get that lit-from-within glow hydration. Grab yours directly in my TikTok showcase!"</div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 bg-white flex items-center justify-center p-4 border-l border-[#FFE0E0]">
+                    <img src="https://i.postimg.cc/jjTjvy2Y/ABNC-LIFTRA-3D-FIRMING-MIST-scripts01.png" alt="Script 1" class="w-full h-auto rounded-xl shadow-sm hover:scale-105 transition duration-300">
+                </div>
+            </div>
+
+            <!-- Script 2 -->
+            <div class="script-card bg-[#FFF9F9] rounded-3xl mb-10 overflow-hidden flex flex-col md:flex-row fade-up">
+                <div class="md:w-1/2 bg-white flex items-center justify-center p-4 order-last md:order-first border-r border-[#FFE0E0]">
+                    <img src="https://i.postimg.cc/XqrNX8H7/ABNC-LIFTRA-3D-FIRMING-MIST-scripts02.png" alt="Script 2" class="w-full h-auto rounded-xl shadow-sm hover:scale-105 transition duration-300">
+                </div>
+                <div class="md:w-1/2 p-8 md:p-10">
+                    <span class="script-tag">B02: GLOW HOOK</span>
+                    <h3 class="text-2xl font-extrabold mt-4 mb-6 leading-tight" style="color: var(--brand-primary)">Visual satisfaction and instant results.</h3>
+                    <div class="space-y-5">
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">HOOK (0-3s)</strong> "Look at this glow! I sprayed this on my dry face 30 seconds ago. Instant glass skin, zero filter."</div>
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">MAIN POINT</strong> "Formulated with LIFTRAPDRN™ and 300 Da low-molecular collagen to instantly plump skin."</div>
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">PROOF</strong> "Clinically proven +102% moisture boost and +34% radiance instantly without feeling heavy."</div>
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">CTA</strong> "Experience the instant hydration difference yourself. Tap the showcase link below to shop!"</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Script 3 -->
+            <div class="script-card bg-[#FFF9F9] rounded-3xl mb-10 overflow-hidden flex flex-col md:flex-row fade-up">
+                <div class="md:w-1/2 p-8 md:p-10">
+                    <span class="script-tag">B03: OFFICE REFRESH</span>
+                    <h3 class="text-2xl font-extrabold mt-4 mb-6 leading-tight" style="color: var(--brand-primary)">Makeup setting defense against dry indoor office air.</h3>
+                    <div class="space-y-5">
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">HOOK (0-3s)</strong> "GRWM: How I keep makeup fresh and dewy all day long, even in harsh office air conditioning."</div>
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">MAIN POINT</strong> "Just shake ABN°C Liftra Mist. The fermented moringa oil layer locks in moisture effortlessly."</div>
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">DEMO</strong> "A quick spritz revives skin, sets makeup, and restores an expensive-looking natural glow."</div>
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">CTA</strong> "The ultimate desk essential for creators. Tap the link to upgrade your daily skincare routine."</div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 bg-white flex items-center justify-center p-4 border-l border-[#FFE0E0]">
+                    <img src="https://i.postimg.cc/vmSZykXx/ABNC-LIFTRA-3D-FIRMING-MIST-scripts03.png" alt="Script 3" class="w-full h-auto rounded-xl shadow-sm hover:scale-105 transition duration-300">
+                </div>
+            </div>
+
+            <!-- Script 4 -->
+            <div class="script-card bg-[#FFF9F9] rounded-3xl mb-10 overflow-hidden flex flex-col md:flex-row fade-up">
+                <div class="md:w-1/2 bg-white flex items-center justify-center p-4 order-last md:order-first border-r border-[#FFE0E0]">
+                    <img src="https://i.postimg.cc/3JCrNd9c/ABNC-LIFTRA-3D-FIRMING-MIST-scripts04.png" alt="Script 4" class="w-full h-auto rounded-xl shadow-sm hover:scale-105 transition duration-300">
+                </div>
+                <div class="md:w-1/2 p-8 md:p-10">
+                    <span class="script-tag">B04: ASMR SHAKE</span>
+                    <h3 class="text-2xl font-extrabold mt-4 mb-6 leading-tight" style="color: var(--brand-primary)">Visual satisfaction and macro texture visualization.</h3>
+                    <div class="space-y-5">
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">HOOK (0-3s)</strong> "Look at this visual texture! Have you ever seen a facial mist that's half serum, half oil?"</div>
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">MAIN POINT</strong> "Dual-layer innovation: shake to blend 80% lifting essence and 20% moringa oil."</div>
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">VISUAL PROOF</strong> "Micro-fine mist feels like a cloud of hydration. Absorbs rapidly into a glossy finish."</div>
+                        <div class="script-text"><strong class="text-[#FF6B6B] block text-sm mb-1 tracking-wider">CTA</strong> "Experience the bi-phase magic yourself ✨. Tap below to grab yours on TikTok Shop!"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部联系与 CTA -->
+    <footer class="py-20 text-center relative overflow-hidden" style="background: var(--brand-primary); color: white;">
+        <div class="max-w-4xl mx-auto px-6 fade-up relative z-10">
+            <h2 class="text-4xl md:text-5xl font-black mb-6">Ready for the Glow?</h2>
+            <p class="text-lg md:text-xl opacity-90 mb-10 max-w-2xl mx-auto font-medium">
+                Don't forget to tag <strong class="text-[#FF6B6B]">@abnc_official</strong> and use <strong class="text-[#FF6B6B]">#ABNC #Kbeauty</strong> in your caption. Need help? Reach out to us directly!
+            </p>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-16">
+                <!-- 申请样品按钮 -->
+                <a href="https://shop.tiktok.com/us/store/abnc-us-store/8656968372695634186" target="_blank" class="btn-fill border-white text-white" style="--brand-primary: white; --brand-accent: #FF6B6B;" onmouseover="this.style.color='#8B3A3A'" onmouseout="this.style.color='white'">
+                    Apply for Sample
+                </a>
+                
+                <!-- 联系方式 -->
+                <div class="flex flex-col md:flex-row gap-4 text-sm font-bold">
+                    <a href="mailto:Harin@abnc.com" class="bg-white/10 hover:bg-white/20 transition-all duration-300 px-6 py-4 rounded-full flex items-center justify-center gap-2 border border-white/20 hover:scale-105 transform shadow-sm hover:shadow-md">
+                        <span>✉️</span> Harin@abnc.com
+                    </a>
+                    <a href="https://wa.me/821039657894" target="_blank" class="bg-white/10 hover:bg-white/20 transition-all duration-300 px-6 py-4 rounded-full flex items-center justify-center gap-2 border border-white/20 hover:scale-105 transform shadow-sm hover:shadow-md">
+                        <span>💬</span> WhatsApp: +82 010-3965-7894
+                    </a>
+                </div>
+            </div>
+            <img src="https://i.postimg.cc/vTthgr4H/ABNC-LIFTRA-3D-FIRMING-MIST.jpg" alt="Product" class="h-40 mx-auto rounded-xl shadow-2xl hover:scale-110 transition duration-500 cursor-pointer">
+        </div>
+    </footer>
+
+    <!-- 交互逻辑脚本 -->
+    <script>
+        // 1. 滚动进入视口动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+
+        // 2. 逐字弹跳效果初始化
+        const heroTitle = document.getElementById('hero-title');
+        const text = heroTitle.innerText;
+        heroTitle.innerHTML = '';
+        text.split('').forEach((char, index) => {
+            const span = document.createElement('span');
+            span.className = 'bounce-letter';
+            span.innerText = char === ' ' ? '\u00A0' : char;
+            span.style.animationDelay = `${index * 0.1}s`; 
+            heroTitle.appendChild(span);
+        });
+
+        // 3. 游标扩散填满按钮
+        document.querySelectorAll('.btn-fill').forEach(button => {
+            button.addEventListener('pointerenter', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const maxDist = Math.max(
+                    Math.hypot(x, y),
+                    Math.hypot(rect.width - x, y),
+                    Math.hypot(x, rect.height - y),
+                    Math.hypot(rect.width - x, rect.height - y)
+                );
+                button.style.setProperty('--x', `${x}px`);
+                button.style.setProperty('--y', `${y}px`);
+                button.style.setProperty('--size', `${maxDist * 2}px`);
+            });
+        });
+    </script>
+</body>
+</html>
