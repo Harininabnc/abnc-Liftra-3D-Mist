@@ -23,7 +23,6 @@
             -webkit-font-smoothing: antialiased;
         }
         
-        /* 统一使用 Montserrat 作为大字标题 */
         h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
 
         /* 1. Fade-up 滚动动画 */
@@ -125,25 +124,35 @@
         </div>
     </header>
 
-    <!-- 核心数据 -->
+    <!-- 核心数据 (差异化文案升级) -->
     <section class="py-16 bg-white border-y border-gray-100">
         <div class="max-w-6xl mx-auto px-6 text-center fade-up">
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-10" style="color: var(--brand-primary)">Backed by Clinical Proof</h2>
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4" style="color: var(--brand-primary)">Backed by Clinical Proof</h2>
+            <p class="text-gray-500 font-medium mb-10">Tested by OATC Skin Clinical Center (33 subjects, ages 20-65)</p>
+            
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-[#FFF9F9] p-8 rounded-3xl border border-[#FFE0E0]">
-                    <h3 class="text-6xl font-black" style="color: var(--brand-primary)">+102%</h3>
-                    <p class="font-bold text-lg mt-2">Moisture Content</p>
-                    <p class="text-sm text-gray-500">Instantly after 1 use</p>
+                <!-- 卡片 1 -->
+                <div class="bg-[#FFF9F9] p-8 rounded-3xl border border-[#FFE0E0] hover:-translate-y-2 transition duration-300">
+                    <h3 class="text-6xl font-black mb-3" style="color: var(--brand-primary)">+102%</h3>
+                    <p class="font-extrabold text-xl mb-1">Moisture Content</p>
+                    <p class="text-sm font-bold text-[#FF6B6B] tracking-wider uppercase">Instant Hydration</p>
+                    <p class="text-sm text-gray-500 mt-2">Measured just 1 spray after</p>
                 </div>
-                <div class="bg-[#FFF9F9] p-8 rounded-3xl border border-[#FFE0E0]">
-                    <h3 class="text-6xl font-black" style="color: var(--brand-primary)">+34%</h3>
-                    <p class="font-bold text-lg mt-2">Skin Radiance</p>
-                    <p class="text-sm text-gray-500">Instantly after 1 use</p>
+                
+                <!-- 卡片 2 -->
+                <div class="bg-[#FFF9F9] p-8 rounded-3xl border border-[#FFE0E0] hover:-translate-y-2 transition duration-300">
+                    <h3 class="text-6xl font-black mb-3" style="color: var(--brand-primary)">+34%</h3>
+                    <p class="font-extrabold text-xl mb-1">Skin Radiance</p>
+                    <p class="text-sm font-bold text-[#FF6B6B] tracking-wider uppercase">Lit-From-Within Glow</p>
+                    <p class="text-sm text-gray-500 mt-2">Instantly after a single use</p>
                 </div>
-                <div class="bg-[#FFF9F9] p-8 rounded-3xl border border-[#FFE0E0]">
-                    <h3 class="text-6xl font-black" style="color: var(--brand-primary)">+11.7%</h3>
-                    <p class="font-bold text-lg mt-2">Instant Plumping</p>
-                    <p class="text-sm text-gray-500">Temporary lifting effect</p>
+                
+                <!-- 卡片 3 -->
+                <div class="bg-[#FFF9F9] p-8 rounded-3xl border border-[#FFE0E0] hover:-translate-y-2 transition duration-300">
+                    <h3 class="text-6xl font-black mb-3" style="color: var(--brand-primary)">+11.7%</h3>
+                    <p class="font-extrabold text-xl mb-1">Instant Plumping</p>
+                    <p class="text-sm font-bold text-[#FF6B6B] tracking-wider uppercase">Visible Lifting Effect</p>
+                    <p class="text-sm text-gray-500 mt-2">Temporary tightening after 1 use</p>
                 </div>
             </div>
         </div>
@@ -157,42 +166,38 @@
                 <p class="text-xl text-gray-600 mt-4 font-medium">The unique selling points (USPs) you need to highlight.</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
                 <!-- 卖点 1 -->
                 <div class="feature-card bg-white rounded-3xl p-8 fade-up flex flex-col items-start h-full cursor-default">
-                    <div class="feature-icon w-16 h-16 rounded-2xl bg-[#FFF0F0] text-[#8B3A3A] flex items-center justify-center text-4xl mb-6 transition-colors shadow-sm">
-                        💧
-                    </div>
+                    <div class="feature-icon w-16 h-16 rounded-2xl bg-[#FFF0F0] text-[#8B3A3A] flex items-center justify-center text-4xl mb-6 transition-colors shadow-sm">💧</div>
                     <h3 class="text-2xl font-extrabold mb-3 tracking-tight transition-colors">80/20 Bi-Phase</h3>
                     <p class="feature-desc text-base text-gray-600 transition-colors leading-relaxed font-medium">80% Lifting Essence + 20% Moringa Oil. Shake to mix for an ultra-fine, non-sticky mist.</p>
                 </div>
-
                 <!-- 卖点 2 -->
                 <div class="feature-card bg-white rounded-3xl p-8 fade-up flex flex-col items-start h-full cursor-default" style="transition-delay: 0.1s;">
-                    <div class="feature-icon w-16 h-16 rounded-2xl bg-[#FFF0F0] text-[#8B3A3A] flex items-center justify-center text-4xl mb-6 transition-colors shadow-sm">
-                        ✨
-                    </div>
+                    <div class="feature-icon w-16 h-16 rounded-2xl bg-[#FFF0F0] text-[#8B3A3A] flex items-center justify-center text-4xl mb-6 transition-colors shadow-sm">✨</div>
                     <h3 class="text-2xl font-extrabold mb-3 tracking-tight transition-colors">Instant Glass Skin</h3>
                     <p class="feature-desc text-base text-gray-600 transition-colors leading-relaxed font-medium">Creates a breathable moisture barrier that gives an expensive-looking natural glow immediately.</p>
                 </div>
-
                 <!-- 卖点 3 -->
                 <div class="feature-card bg-white rounded-3xl p-8 fade-up flex flex-col items-start h-full cursor-default" style="transition-delay: 0.2s;">
-                    <div class="feature-icon w-16 h-16 rounded-2xl bg-[#FFF0F0] text-[#8B3A3A] flex items-center justify-center text-4xl mb-6 transition-colors shadow-sm">
-                        🧬
-                    </div>
+                    <div class="feature-icon w-16 h-16 rounded-2xl bg-[#FFF0F0] text-[#8B3A3A] flex items-center justify-center text-4xl mb-6 transition-colors shadow-sm">🧬</div>
                     <h3 class="text-2xl font-extrabold mb-3 tracking-tight transition-colors">LIFTRA PDRN™</h3>
                     <p class="feature-desc text-base text-gray-600 transition-colors leading-relaxed font-medium">Formulated with LIFTRA PDRN™ and 300 Da low-molecular collagen to instantly plump and firm skin.</p>
                 </div>
-
                 <!-- 卖点 4 -->
                 <div class="feature-card bg-white rounded-3xl p-8 fade-up flex flex-col items-start h-full cursor-default" style="transition-delay: 0.3s;">
-                    <div class="feature-icon w-16 h-16 rounded-2xl bg-[#FFF0F0] text-[#8B3A3A] flex items-center justify-center text-4xl mb-6 transition-colors shadow-sm">
-                        🛡️
-                    </div>
+                    <div class="feature-icon w-16 h-16 rounded-2xl bg-[#FFF0F0] text-[#8B3A3A] flex items-center justify-center text-4xl mb-6 transition-colors shadow-sm">🛡️</div>
                     <h3 class="text-2xl font-extrabold mb-3 tracking-tight transition-colors">All-Day Defense</h3>
                     <p class="feature-desc text-base text-gray-600 transition-colors leading-relaxed font-medium">Locks in moisture against harsh office AC and dry indoor air. Perfect for mid-day makeup refresh.</p>
                 </div>
+            </div>
+
+            <!-- 双层3D系统图解 -->
+            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-[#FFE0E0] fade-up text-center">
+                <h3 class="text-3xl font-extrabold mb-4" style="color: var(--brand-primary)">The Dual-Layer 3D System</h3>
+                <p class="text-lg text-gray-600 font-medium mb-8">Hydration & Firming (Serum) + Moisture Sealing (Oil) = Instant Glow</p>
+                <img src="https://i.postimg.cc/Twp5tgTN/ABNC-LIFTRA-3D-Mist-Dual-Layer-System.png" alt="Dual Layer System" class="w-full max-w-4xl mx-auto rounded-xl shadow-sm hover:scale-[1.02] transition duration-500">
             </div>
         </div>
     </section>
